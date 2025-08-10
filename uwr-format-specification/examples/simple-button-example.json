@@ -1,0 +1,490 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "captureId": "550e8400-e29b-41d4-a716-446655440000",
+    "captureTimestamp": "2024-01-15T10:30:00.000Z",
+    "captureEnvironment": {
+      "platform": "windows",
+      "browserEngine": "chromium-120.0.6099.109",
+      "gpuInfo": {
+        "vendor": "NVIDIA",
+        "model": "GeForce RTX 3080",
+        "driver": "531.18",
+        "vram": 10240,
+        "features": ["webgl2", "webgpu", "hardware-acceleration"]
+      },
+      "displayInfo": {
+        "resolution": [1920, 1080],
+        "dpi": 96,
+        "colorDepth": 24,
+        "refreshRate": 144,
+        "hdr": false
+      }
+    },
+    "targetUrl": "https://example.com/button-demo",
+    "fidelityScore": {
+      "overall": 0.9995,
+      "visual": 0.9998,
+      "behavioral": 0.9993,
+      "timing": 0.9996,
+      "color": 0.9994
+    },
+    "viewportConfigurations": [
+      {
+        "name": "desktop",
+        "width": 1920,
+        "height": 1080,
+        "deviceScaleFactor": 1,
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "hasTouch": false
+      }
+    ],
+    "captureSettings": {
+      "frameRate": 120,
+      "colorSpace": "srgb",
+      "captureMode": "full",
+      "interactionDepth": 3,
+      "scrollStrategy": "intelligent",
+      "networkThrottling": null
+    },
+    "edgeCasesDetected": []
+  },
+  "visualData": {
+    "tensor4D": {
+      "format": "compressed",
+      "dimensions": [1920, 1080, 1, 3600],
+      "encoding": "h265",
+      "dataUrl": "data/visual_tensor_550e8400.uwr-tensor",
+      "compressionRatio": 15.2,
+      "temporalResolution": 120,
+      "spatialResolution": [1920, 1080],
+      "bitDepth": 10
+    },
+    "keyframes": [
+      {
+        "timestamp": 0,
+        "significance": "major",
+        "visualHash": "a7b9c3d5e7f1234567890abcdef",
+        "deltaFromPrevious": 0,
+        "associatedEvents": []
+      },
+      {
+        "timestamp": 500,
+        "significance": "transition",
+        "visualHash": "b8c4d6e8f2345678901bcdef01",
+        "deltaFromPrevious": 0.15,
+        "associatedEvents": ["interaction_001"]
+      },
+      {
+        "timestamp": 800,
+        "significance": "major",
+        "visualHash": "c9d5e7f9034567890abcdef012",
+        "deltaFromPrevious": 0.08,
+        "associatedEvents": []
+      }
+    ],
+    "depthMaps": [],
+    "colorProfiles": [
+      {
+        "space": "srgb",
+        "gamut": [[0.64, 0.33], [0.3, 0.6], [0.15, 0.06]],
+        "whitePoint": [0.3127, 0.329],
+        "transferFunction": "srgb"
+      }
+    ]
+  },
+  "molecules": [
+    {
+      "id": "mol_001",
+      "type": "interactive_button",
+      "visualSignature": {
+        "primaryImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+        "alternateStates": {
+          "hover": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
+          "active": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+        },
+        "colorFingerprint": [0, 123, 255, 255],
+        "shapeDescriptor": [0.1, 0.2, 0.15, 0.25, 0.3],
+        "texturePattern": "solid"
+      },
+      "bounds": {
+        "static": {
+          "x": 810,
+          "y": 490,
+          "width": 300,
+          "height": 100
+        },
+        "dynamic": null,
+        "transformations": [
+          {
+            "type": "scale",
+            "values": [1.05, 1.05],
+            "origin": [0.5, 0.5, 0],
+            "timing": {
+              "start": 500,
+              "duration": 150,
+              "easing": "ease-out"
+            }
+          }
+        ],
+        "zIndex": 10,
+        "opacity": 1
+      },
+      "properties": {
+        "visual": {
+          "backgroundColor": {"static": "#007bff"},
+          "borderColor": {"static": "#0056b3"},
+          "textColor": {"static": "#ffffff"},
+          "fontSize": {"static": 18},
+          "fontFamily": "Arial, sans-serif",
+          "boxShadow": [
+            {
+              "offsetX": 0,
+              "offsetY": 4,
+              "blur": 6,
+              "spread": 0,
+              "color": "rgba(0, 0, 0, 0.1)"
+            }
+          ],
+          "filter": [],
+          "clipPath": null
+        },
+        "behavioral": {
+          "scrollable": false,
+          "draggable": false,
+          "focusable": true,
+          "hoverable": true,
+          "clickable": true,
+          "inputType": null,
+          "validationRules": []
+        },
+        "semantic": {
+          "role": "button",
+          "label": "Submit Form",
+          "description": "Click to submit the form",
+          "language": "en",
+          "importance": 0.9
+        },
+        "performance": {
+          "renderTime": 2.3,
+          "paintTime": 1.8,
+          "layoutTime": 0.5,
+          "gpuAccelerated": true,
+          "layerCount": 1
+        }
+      },
+      "interactions": {
+        "click": {
+          "resultingState": "state_002",
+          "timing": {
+            "delay": 0,
+            "duration": 300,
+            "debounce": 0,
+            "throttle": 0
+          },
+          "preventDefault": false,
+          "stopPropagation": false,
+          "conditions": []
+        },
+        "hover": {
+          "resultingState": "state_001_hover",
+          "timing": {
+            "delay": 0,
+            "duration": 150,
+            "debounce": 0,
+            "throttle": 0
+          },
+          "preventDefault": false,
+          "stopPropagation": false,
+          "conditions": []
+        },
+        "focus": null,
+        "scroll": null,
+        "drag": null,
+        "input": null,
+        "custom": {}
+      },
+      "relationships": [
+        {
+          "type": "parent",
+          "target": "mol_002",
+          "strength": 1.0,
+          "bidirectional": false,
+          "metadata": {}
+        }
+      ],
+      "lifecycle": {
+        "created": {
+          "timestamp": 0,
+          "trigger": "page_load",
+          "fromState": null,
+          "toState": "state_001"
+        },
+        "modified": [],
+        "destroyed": null,
+        "visibility": {
+          "visible": [{"start": 0, "end": 30000}],
+          "hidden": [],
+          "partial": []
+        }
+      }
+    }
+  ],
+  "stateGraph": {
+    "nodes": [
+      {
+        "id": "state_001",
+        "visualHash": "a7b9c3d5e7f1234567890abcdef",
+        "molecules": [
+          {
+            "moleculeId": "mol_001",
+            "properties": {
+              "backgroundColor": "#007bff"
+            },
+            "bounds": {
+              "x": 810,
+              "y": 490,
+              "width": 300,
+              "height": 100
+            },
+            "visible": true
+          }
+        ],
+        "timestamp": 0,
+        "frequency": 10,
+        "stability": 0.95
+      },
+      {
+        "id": "state_001_hover",
+        "visualHash": "b7b9c3d5e7f1234567890abcdef",
+        "molecules": [
+          {
+            "moleculeId": "mol_001",
+            "properties": {
+              "backgroundColor": "#0056b3",
+              "transform": "scale(1.05)"
+            },
+            "bounds": {
+              "x": 810,
+              "y": 490,
+              "width": 315,
+              "height": 105
+            },
+            "visible": true
+          }
+        ],
+        "timestamp": 450,
+        "frequency": 8,
+        "stability": 0.85
+      },
+      {
+        "id": "state_002",
+        "visualHash": "c9d5e7f9034567890abcdef012",
+        "molecules": [
+          {
+            "moleculeId": "mol_001",
+            "properties": {
+              "backgroundColor": "#28a745",
+              "text": "Success!"
+            },
+            "bounds": {
+              "x": 810,
+              "y": 490,
+              "width": 300,
+              "height": 100
+            },
+            "visible": true
+          }
+        ],
+        "timestamp": 800,
+        "frequency": 5,
+        "stability": 0.98
+      }
+    ],
+    "edges": [
+      {
+        "id": "transition_001",
+        "fromState": "state_001",
+        "toState": "state_001_hover",
+        "trigger": {
+          "type": "interaction",
+          "details": {
+            "action": "mouseover",
+            "target": "mol_001"
+          },
+          "conditions": []
+        },
+        "duration": 150,
+        "probability": 0.8,
+        "reversible": true,
+        "animations": [
+          {
+            "moleculeId": "mol_001",
+            "animationType": "transform",
+            "duration": 150,
+            "easing": "ease-out",
+            "keyframes": [
+              {
+                "offset": 0,
+                "properties": {
+                  "transform": "scale(1)"
+                }
+              },
+              {
+                "offset": 1,
+                "properties": {
+                  "transform": "scale(1.05)"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "transition_002",
+        "fromState": "state_001_hover",
+        "toState": "state_002",
+        "trigger": {
+          "type": "interaction",
+          "details": {
+            "action": "click",
+            "target": "mol_001"
+          },
+          "conditions": []
+        },
+        "duration": 300,
+        "probability": 0.95,
+        "reversible": false,
+        "animations": []
+      }
+    ],
+    "initialState": "state_001",
+    "terminalStates": ["state_002"],
+    "stateGroups": [
+      {
+        "id": "group_001",
+        "name": "button_states",
+        "states": ["state_001", "state_001_hover", "state_002"],
+        "type": "exclusive",
+        "metadata": {}
+      }
+    ]
+  },
+  "executionTrace": {
+    "renderingCommands": [
+      {
+        "timestamp": 0,
+        "type": "paint",
+        "target": "mol_001",
+        "command": {
+          "operation": "fillRect",
+          "params": {
+            "x": 810,
+            "y": 490,
+            "width": 300,
+            "height": 100,
+            "color": "#007bff"
+          }
+        },
+        "duration": 1.8,
+        "gpuAccelerated": true
+      }
+    ],
+    "networkSequence": [],
+    "computedStyles": [
+      {
+        "timestamp": 0,
+        "moleculeId": "mol_001",
+        "styles": {
+          "display": "block",
+          "position": "absolute",
+          "backgroundColor": "#007bff",
+          "color": "#ffffff",
+          "fontSize": "18px",
+          "cursor": "pointer"
+        },
+        "inherited": [],
+        "cascadeOrder": 1
+      }
+    ],
+    "performanceMetrics": [
+      {
+        "timestamp": 0,
+        "type": "fps",
+        "value": 120,
+        "context": "initial_render"
+      },
+      {
+        "timestamp": 500,
+        "type": "fps",
+        "value": 118,
+        "context": "hover_animation"
+      }
+    ],
+    "consoleOutput": [],
+    "memorySnapshots": [
+      {
+        "timestamp": 0,
+        "heapSize": 52428800,
+        "heapUsed": 31457280,
+        "external": 1048576,
+        "arrayBuffers": 524288
+      }
+    ]
+  },
+  "behavioralEquations": [
+    {
+      "id": "eq_001",
+      "element": "mol_001",
+      "property": "scale",
+      "equation": "1 + (0.05 * hover_state)",
+      "variables": [
+        {
+          "name": "hover_state",
+          "type": "custom",
+          "range": [0, 1],
+          "unit": "boolean"
+        }
+      ],
+      "constraints": {
+        "min": 1,
+        "max": 1.05
+      },
+      "domain": {
+        "states": ["state_001", "state_001_hover"],
+        "timeRange": null,
+        "viewports": ["desktop"],
+        "conditions": []
+      },
+      "accuracy": 1.0
+    }
+  ],
+  "validationChecksums": {
+    "visualDataChecksum": "sha256:7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730",
+    "moleculeTreeChecksum": "sha256:b7c0a3e8c0d9e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+    "stateGraphChecksum": "sha256:c8d1a4f9d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8",
+    "crossValidation": [
+      {
+        "source": "visualData",
+        "target": "molecules",
+        "method": "visual_match",
+        "score": 0.9998,
+        "details": {
+          "matchedPixels": 2073598,
+          "totalPixels": 2073600,
+          "mismatchedPixels": 2
+        }
+      },
+      {
+        "source": "stateGraph",
+        "target": "behavioralEquations",
+        "method": "behavioral_consistency",
+        "score": 1.0,
+        "details": {
+          "consistentTransitions": 2,
+          "totalTransitions": 2
+        }
+      }
+    ]
+  }
+}

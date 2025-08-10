@@ -1,0 +1,722 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://uwr-format.org/schemas/v1.0/uwr-document.json",
+  "title": "Universal Website Representation (UWR) Document",
+  "description": "Schema for UWR format v1.0 - Revolutionary website capture format",
+  "type": "object",
+  "required": [
+    "version",
+    "metadata",
+    "visualData",
+    "molecules",
+    "stateGraph",
+    "executionTrace",
+    "behavioralEquations",
+    "validationChecksums"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$",
+      "description": "UWR format version"
+    },
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "visualData": {
+      "$ref": "#/definitions/visualData"
+    },
+    "molecules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/molecule"
+      },
+      "minItems": 1
+    },
+    "stateGraph": {
+      "$ref": "#/definitions/stateGraph"
+    },
+    "executionTrace": {
+      "$ref": "#/definitions/executionTrace"
+    },
+    "behavioralEquations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/behavioralEquation"
+      }
+    },
+    "validationChecksums": {
+      "$ref": "#/definitions/validationChecksums"
+    }
+  },
+  "definitions": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "captureId",
+        "captureTimestamp",
+        "captureEnvironment",
+        "targetUrl",
+        "fidelityScore",
+        "viewportConfigurations",
+        "captureSettings"
+      ],
+      "properties": {
+        "captureId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "captureTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "captureEnvironment": {
+          "type": "object",
+          "required": ["platform", "browserEngine", "gpuInfo", "displayInfo"],
+          "properties": {
+            "platform": {
+              "type": "string",
+              "enum": ["windows", "linux", "macos"]
+            },
+            "browserEngine": {
+              "type": "string"
+            },
+            "gpuInfo": {
+              "type": "object",
+              "required": ["vendor", "model", "driver", "vram", "features"],
+              "properties": {
+                "vendor": {"type": "string"},
+                "model": {"type": "string"},
+                "driver": {"type": "string"},
+                "vram": {"type": "number"},
+                "features": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            },
+            "displayInfo": {
+              "type": "object",
+              "required": ["resolution", "dpi", "colorDepth", "refreshRate", "hdr"],
+              "properties": {
+                "resolution": {
+                  "type": "array",
+                  "items": {"type": "number"},
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "dpi": {"type": "number"},
+                "colorDepth": {"type": "number"},
+                "refreshRate": {"type": "number"},
+                "hdr": {"type": "boolean"}
+              }
+            }
+          }
+        },
+        "targetUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "fidelityScore": {
+          "type": "object",
+          "required": ["overall", "visual", "behavioral", "timing", "color"],
+          "properties": {
+            "overall": {"type": "number", "minimum": 0, "maximum": 1},
+            "visual": {"type": "number", "minimum": 0, "maximum": 1},
+            "behavioral": {"type": "number", "minimum": 0, "maximum": 1},
+            "timing": {"type": "number", "minimum": 0, "maximum": 1},
+            "color": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        },
+        "viewportConfigurations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "width", "height", "deviceScaleFactor", "userAgent", "hasTouch"],
+            "properties": {
+              "name": {"type": "string"},
+              "width": {"type": "number"},
+              "height": {"type": "number"},
+              "deviceScaleFactor": {"type": "number"},
+              "userAgent": {"type": "string"},
+              "hasTouch": {"type": "boolean"}
+            }
+          }
+        },
+        "captureSettings": {
+          "type": "object",
+          "required": ["frameRate", "colorSpace", "captureMode", "interactionDepth", "scrollStrategy"],
+          "properties": {
+            "frameRate": {"type": "number", "minimum": 60, "maximum": 240},
+            "colorSpace": {"type": "string", "enum": ["srgb", "p3", "rec2020"]},
+            "captureMode": {"type": "string", "enum": ["full", "incremental", "adaptive"]},
+            "interactionDepth": {"type": "number"},
+            "scrollStrategy": {"type": "string", "enum": ["exhaustive", "intelligent", "sampled"]},
+            "networkThrottling": {
+              "type": ["object", "null"],
+              "properties": {
+                "downloadThroughput": {"type": "number"},
+                "uploadThroughput": {"type": "number"},
+                "latency": {"type": "number"}
+              }
+            }
+          }
+        },
+        "edgeCasesDetected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "description", "handlingStrategy", "occurrences"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "infinite_scroll",
+                  "real_time_data",
+                  "webrtc_stream",
+                  "authentication",
+                  "ab_testing",
+                  "geo_restriction",
+                  "rate_limiting",
+                  "pwa_offline",
+                  "custom"
+                ]
+              },
+              "description": {"type": "string"},
+              "handlingStrategy": {"type": "string"},
+              "occurrences": {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+    "visualData": {
+      "type": "object",
+      "required": ["tensor4D", "keyframes", "depthMaps", "colorProfiles"],
+      "properties": {
+        "tensor4D": {
+          "type": "object",
+          "required": [
+            "format",
+            "dimensions",
+            "encoding",
+            "dataUrl",
+            "compressionRatio",
+            "temporalResolution",
+            "spatialResolution",
+            "bitDepth"
+          ],
+          "properties": {
+            "format": {"type": "string", "enum": ["float32", "uint16", "compressed"]},
+            "dimensions": {
+              "type": "array",
+              "items": {"type": "number"},
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "encoding": {"type": "string", "enum": ["raw", "h265", "av1", "custom"]},
+            "dataUrl": {"type": "string"},
+            "compressionRatio": {"type": "number"},
+            "temporalResolution": {"type": "number"},
+            "spatialResolution": {
+              "type": "array",
+              "items": {"type": "number"},
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "bitDepth": {"type": "number"}
+          }
+        },
+        "keyframes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "significance", "visualHash", "deltaFromPrevious", "associatedEvents"],
+            "properties": {
+              "timestamp": {"type": "number"},
+              "significance": {"type": "string", "enum": ["major", "minor", "transition"]},
+              "visualHash": {"type": "string"},
+              "deltaFromPrevious": {"type": "number"},
+              "associatedEvents": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          }
+        },
+        "depthMaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "resolution", "encoding", "dataUrl", "minDepth", "maxDepth"],
+            "properties": {
+              "timestamp": {"type": "number"},
+              "resolution": {
+                "type": "array",
+                "items": {"type": "number"},
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "encoding": {"type": "string", "enum": ["float32", "uint16"]},
+              "dataUrl": {"type": "string"},
+              "minDepth": {"type": "number"},
+              "maxDepth": {"type": "number"}
+            }
+          }
+        },
+        "colorProfiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["space", "gamut", "whitePoint", "transferFunction"],
+            "properties": {
+              "space": {"type": "string", "enum": ["srgb", "p3", "rec2020", "lab"]},
+              "gamut": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {"type": "number"}
+                }
+              },
+              "whitePoint": {
+                "type": "array",
+                "items": {"type": "number"},
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "transferFunction": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "molecule": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "visualSignature",
+        "bounds",
+        "properties",
+        "interactions",
+        "relationships",
+        "lifecycle"
+      ],
+      "properties": {
+        "id": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": [
+            "text",
+            "image",
+            "video",
+            "canvas",
+            "webgl",
+            "interactive_button",
+            "input_field",
+            "container",
+            "navigation",
+            "animation_particle",
+            "svg_element",
+            "iframe",
+            "custom"
+          ]
+        },
+        "visualSignature": {
+          "type": "object",
+          "required": ["primaryImage", "alternateStates", "colorFingerprint", "shapeDescriptor", "texturePattern"],
+          "properties": {
+            "primaryImage": {"type": "string"},
+            "alternateStates": {"type": "object"},
+            "colorFingerprint": {
+              "type": "array",
+              "items": {"type": "number"}
+            },
+            "shapeDescriptor": {
+              "type": "array",
+              "items": {"type": "number"}
+            },
+            "texturePattern": {"type": "string"}
+          }
+        },
+        "bounds": {
+          "type": "object",
+          "required": ["static", "dynamic", "transformations", "zIndex", "opacity"],
+          "properties": {
+            "static": {
+              "type": ["object", "null"],
+              "properties": {
+                "x": {"type": "number"},
+                "y": {"type": "number"},
+                "width": {"type": "number"},
+                "height": {"type": "number"}
+              }
+            },
+            "dynamic": {"type": ["string", "null"]},
+            "transformations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["type", "values", "origin", "timing"],
+                "properties": {
+                  "type": {"type": "string", "enum": ["translate", "rotate", "scale", "skew", "matrix"]},
+                  "values": {
+                    "type": "array",
+                    "items": {"type": "number"}
+                  },
+                  "origin": {
+                    "type": "array",
+                    "items": {"type": "number"},
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "timing": {
+                    "type": "object",
+                    "required": ["start", "duration", "easing"],
+                    "properties": {
+                      "start": {"type": "number"},
+                      "duration": {"type": "number"},
+                      "easing": {"type": "string"}
+                    }
+                  }
+                }
+              }
+            },
+            "zIndex": {
+              "oneOf": [
+                {"type": "number"},
+                {"type": "string", "enum": ["dynamic"]}
+              ]
+            },
+            "opacity": {
+              "oneOf": [
+                {"type": "number", "minimum": 0, "maximum": 1},
+                {"type": "string", "enum": ["dynamic"]}
+              ]
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "required": ["visual", "behavioral", "semantic", "performance"],
+          "properties": {
+            "visual": {"type": "object"},
+            "behavioral": {"type": "object"},
+            "semantic": {"type": "object"},
+            "performance": {"type": "object"}
+          }
+        },
+        "interactions": {
+          "type": "object",
+          "properties": {
+            "click": {"$ref": "#/definitions/interactionHandler"},
+            "hover": {"$ref": "#/definitions/interactionHandler"},
+            "focus": {"$ref": "#/definitions/interactionHandler"},
+            "scroll": {"$ref": "#/definitions/interactionHandler"},
+            "drag": {"$ref": "#/definitions/interactionHandler"},
+            "input": {"$ref": "#/definitions/interactionHandler"},
+            "custom": {"type": "object"}
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "target", "strength", "bidirectional", "metadata"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "parent",
+                  "child",
+                  "sibling",
+                  "reference",
+                  "dependency",
+                  "visual_group",
+                  "semantic_group",
+                  "interaction_group"
+                ]
+              },
+              "target": {"type": "string"},
+              "strength": {"type": "number", "minimum": 0, "maximum": 1},
+              "bidirectional": {"type": "boolean"},
+              "metadata": {"type": "object"}
+            }
+          }
+        },
+        "lifecycle": {
+          "type": "object",
+          "required": ["created", "modified", "destroyed", "visibility"],
+          "properties": {
+            "created": {"$ref": "#/definitions/lifecycleEvent"},
+            "modified": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/lifecycleEvent"}
+            },
+            "destroyed": {
+              "oneOf": [
+                {"$ref": "#/definitions/lifecycleEvent"},
+                {"type": "null"}
+              ]
+            },
+            "visibility": {
+              "type": "object",
+              "required": ["visible", "hidden", "partial"],
+              "properties": {
+                "visible": {"$ref": "#/definitions/timeRanges"},
+                "hidden": {"$ref": "#/definitions/timeRanges"},
+                "partial": {"$ref": "#/definitions/timeRanges"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "stateGraph": {
+      "type": "object",
+      "required": ["nodes", "edges", "initialState", "terminalStates", "stateGroups"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "visualHash", "molecules", "timestamp", "frequency", "stability"],
+            "properties": {
+              "id": {"type": "string"},
+              "visualHash": {"type": "string"},
+              "molecules": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["moleculeId", "properties", "bounds", "visible"],
+                  "properties": {
+                    "moleculeId": {"type": "string"},
+                    "properties": {"type": "object"},
+                    "bounds": {
+                      "type": "object",
+                      "required": ["x", "y", "width", "height"],
+                      "properties": {
+                        "x": {"type": "number"},
+                        "y": {"type": "number"},
+                        "width": {"type": "number"},
+                        "height": {"type": "number"}
+                      }
+                    },
+                    "visible": {"type": "boolean"}
+                  }
+                }
+              },
+              "timestamp": {"type": "number"},
+              "frequency": {"type": "number"},
+              "stability": {"type": "number"}
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "fromState", "toState", "trigger", "duration", "probability", "reversible", "animations"],
+            "properties": {
+              "id": {"type": "string"},
+              "fromState": {"type": "string"},
+              "toState": {"type": "string"},
+              "trigger": {
+                "type": "object",
+                "required": ["type", "details", "conditions"],
+                "properties": {
+                  "type": {"type": "string", "enum": ["interaction", "time", "scroll", "network", "media", "system"]},
+                  "details": {},
+                  "conditions": {"type": "array"}
+                }
+              },
+              "duration": {"type": "number"},
+              "probability": {"type": "number", "minimum": 0, "maximum": 1},
+              "reversible": {"type": "boolean"},
+              "animations": {"type": "array"}
+            }
+          }
+        },
+        "initialState": {"type": "string"},
+        "terminalStates": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "stateGroups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "states", "type", "metadata"],
+            "properties": {
+              "id": {"type": "string"},
+              "name": {"type": "string"},
+              "states": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "type": {"type": "string", "enum": ["sequential", "parallel", "exclusive"]},
+              "metadata": {"type": "object"}
+            }
+          }
+        }
+      }
+    },
+    "executionTrace": {
+      "type": "object",
+      "required": [
+        "renderingCommands",
+        "networkSequence",
+        "computedStyles",
+        "performanceMetrics",
+        "consoleOutput",
+        "memorySnapshots"
+      ],
+      "properties": {
+        "renderingCommands": {"type": "array"},
+        "networkSequence": {"type": "array"},
+        "computedStyles": {"type": "array"},
+        "performanceMetrics": {"type": "array"},
+        "consoleOutput": {"type": "array"},
+        "memorySnapshots": {"type": "array"}
+      }
+    },
+    "behavioralEquation": {
+      "type": "object",
+      "required": ["id", "element", "property", "equation", "variables", "constraints", "domain", "accuracy"],
+      "properties": {
+        "id": {"type": "string"},
+        "element": {"type": "string"},
+        "property": {"type": "string"},
+        "equation": {"type": "string"},
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "range", "unit"],
+            "properties": {
+              "name": {"type": "string"},
+              "type": {
+                "type": "string",
+                "enum": ["scrollY", "scrollX", "time", "mouseX", "mouseY", "viewportWidth", "viewportHeight", "custom"]
+              },
+              "range": {
+                "type": "array",
+                "items": {"type": "number"},
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "unit": {"type": "string"}
+            }
+          }
+        },
+        "constraints": {
+          "type": "object",
+          "properties": {
+            "min": {"type": "number"},
+            "max": {"type": "number"},
+            "step": {"type": "number"},
+            "allowedValues": {"type": "array"}
+          }
+        },
+        "domain": {
+          "type": "object",
+          "required": ["states", "timeRange", "viewports", "conditions"],
+          "properties": {
+            "states": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "timeRange": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": ["start", "end"],
+                  "properties": {
+                    "start": {"type": "number"},
+                    "end": {"type": "number"}
+                  }
+                },
+                {"type": "null"}
+              ]
+            },
+            "viewports": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "conditions": {"type": "array"}
+          }
+        },
+        "accuracy": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "validationChecksums": {
+      "type": "object",
+      "required": ["visualDataChecksum", "moleculeTreeChecksum", "stateGraphChecksum", "crossValidation"],
+      "properties": {
+        "visualDataChecksum": {"type": "string"},
+        "moleculeTreeChecksum": {"type": "string"},
+        "stateGraphChecksum": {"type": "string"},
+        "crossValidation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source", "target", "method", "score", "details"],
+            "properties": {
+              "source": {"type": "string"},
+              "target": {"type": "string"},
+              "method": {"type": "string", "enum": ["visual_match", "behavioral_consistency", "timing_correlation"]},
+              "score": {"type": "number", "minimum": 0, "maximum": 1},
+              "details": {}
+            }
+          }
+        }
+      }
+    },
+    "interactionHandler": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["resultingState", "timing", "preventDefault", "stopPropagation", "conditions"],
+          "properties": {
+            "resultingState": {"type": "string"},
+            "timing": {
+              "type": "object",
+              "required": ["delay", "duration", "debounce", "throttle"],
+              "properties": {
+                "delay": {"type": "number"},
+                "duration": {"type": "number"},
+                "debounce": {"type": "number"},
+                "throttle": {"type": "number"}
+              }
+            },
+            "preventDefault": {"type": "boolean"},
+            "stopPropagation": {"type": "boolean"},
+            "conditions": {"type": "array"}
+          }
+        },
+        {"type": "null"}
+      ]
+    },
+    "lifecycleEvent": {
+      "type": "object",
+      "required": ["timestamp", "trigger", "fromState", "toState"],
+      "properties": {
+        "timestamp": {"type": "number"},
+        "trigger": {"type": "string"},
+        "fromState": {"type": ["string", "null"]},
+        "toState": {"type": "string"}
+      }
+    },
+    "timeRanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["start", "end"],
+        "properties": {
+          "start": {"type": "number"},
+          "end": {"type": "number"}
+        }
+      }
+    }
+  }
+}

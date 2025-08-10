@@ -1,0 +1,32 @@
+{
+  "name": "uwr-format-specification",
+  "version": "1.0.0",
+  "description": "Universal Website Representation (UWR) Format Specification and Utilities",
+  "main": "utils/uwr-loader.js",
+  "types": "types/uwr-types.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "validate-schema": "ajv compile -s schemas/uwr-schema.json"
+  },
+  "keywords": [
+    "uwr",
+    "website-cloning",
+    "visual-capture",
+    "behavioral-mapping"
+  ],
+  "author": "Revolutionary Website Cloning System",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "ajv": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "molecular-decomposition",
+  "version": "1.0.0",
+  "description": "Computer vision-based element detection and hierarchy extraction for website cloning",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "decompose": "ts-node src/cli.ts",
+    "train": "ts-node src/training/train-model.ts"
+  },
+  "keywords": [
+    "computer-vision",
+    "element-detection",
+    "hierarchy-extraction",
+    "visual-analysis",
+    "website-cloning"
+  ],
+  "author": "Revolutionary Website Cloning System",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "@tensorflow/tfjs-node-gpu": "^4.15.0",
+    "@tensorflow/tfjs": "^4.15.0",
+    "onnxruntime-node": "^1.16.3",
+    "sharp": "^0.33.1",
+    "opencv4nodejs": "^5.6.0",
+    "tesseract.js": "^5.0.4",
+    "color-thief-node": "^1.0.4",
+    "jimp": "^0.22.10",
+    "commander": "^11.1.0",
+    "winston": "^3.11.0",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/lodash": "^4.14.202",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

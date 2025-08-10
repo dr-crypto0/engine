@@ -1,0 +1,43 @@
+{
+  "name": "visual-capture-engine",
+  "version": "1.0.0",
+  "description": "High-performance visual capture engine for revolutionary website cloning",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "capture": "ts-node src/cli.ts"
+  },
+  "keywords": [
+    "screen-capture",
+    "cdp",
+    "puppeteer",
+    "high-fps",
+    "visual-recording"
+  ],
+  "author": "Revolutionary Website Cloning System",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "puppeteer": "^21.6.0",
+    "puppeteer-core": "^21.6.0",
+    "chrome-remote-interface": "^0.33.0",
+    "sharp": "^0.33.0",
+    "commander": "^11.1.0",
+    "winston": "^3.11.0",
+    "p-queue": "^7.4.1",
+    "node-window-manager": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/chrome-remote-interface": "^0.31.11",
+    "@types/sharp": "^0.32.0",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "@revolutionary-web-cloning/temporal-engine",
+  "version": "1.0.0",
+  "description": "Temporal analysis engine for detecting keyframes and correlating visual changes with interaction events",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "temporal-engine": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "temporal-analysis",
+    "keyframe-detection",
+    "change-detection",
+    "event-correlation",
+    "visual-analysis"
+  ],
+  "author": "Revolutionary Web Cloning Team",
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.32.6",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0",
+    "msgpack": "^1.0.3",
+    "winston": "^3.11.0",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/jest": "^29.5.10",
+    "@types/pixelmatch": "^5.2.6",
+    "@types/pngjs": "^6.0.4",
+    "typescript": "^5.3.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "eslint": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
